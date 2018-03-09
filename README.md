@@ -150,6 +150,24 @@
 
 > A contentious specification.
 
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vanilla Web Components: Module 1 - Web Component Fundamentals -HTML Imports</title>
+    <link rel="import" href="notice.html" id="notice"/>
+</head>
+<body>
+    <script>
+        const $link = document.getElementById("notice");
+        const content = $link.import.querySelector(".notice-frame");
+        document.body.appendChild(content.cloneNode(true));
+    </script>    
+</body>
+</html>
+```
+
 ## Web Component Anatomy
 ## Star Rating Component
 ## Configurable Slide out Menu Component
