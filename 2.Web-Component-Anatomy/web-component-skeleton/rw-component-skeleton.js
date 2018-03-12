@@ -1,38 +1,47 @@
-class RwComponentSkeleton extends HTMLElement {
+class RWComponentSkeleton extends HTMLElement {
     constructor() {
         super();
         // Private variables
-        this._private1 = null;
-        // Create a Shadow Root
+        this._private = null;
+        // Create a shadow root
         this._root = this.attachShadow({"mode": "open"});
     }
+
     connectedCallback() {
-        // Add an initial template
-        this._root.innerHTML = `
-            <p id="text">My Web Component Skeleton...</p>
+        //Add an initial template
+        this._root.innerHTML =  `
+            <p id="text"> My Web Component Skeleton...</p>
         `;
-        this._$text = this._root.querySelector("#text"); // Store important elements for later use (prefixing DOM elements with $)
+        // Store important elements for later use
+        // prefixing DOM elements with $
+        this._$text = this._root.querySelector("#text");
     }
-    // Private methods
+
+    // private methods
     _render() {
-        this._$text.innerText = "...is awesome!"; // Selectively update only parts of the template which need to change
+        // Selectively update only parts of the tempalte which need to change
+        this._$text.innerText = "...is awesome!";
     }
+
     // Observe attribute changes
     static get observedAttributes() {
-        return ["an-important-attribute"];
+        return ["attribute"];
     }
+
     // React to attribute changes
     attributeChangedCallback(name, oldValue, newValue) {
-        // Do stuff
+        // Execute logic
     }
+
     // Use setters and getters to create an API for your component
-    set property1(data) {
-        if (this._private1 === data) return;
-        this._private1 = data;
+    set property(data) {
+        if (this._private === data) return;
+        this._private = data;
     }
-    get property1() {
-        return this._private1;
+
+    get property() {
+        return this._private;
     }
 }
-// Use unique but descriptive element and class names
-window.customElements.define("rw-component-skeleton", RwComponentSkeleton);
+
+window.customElements.define('rw-component-skeleton', RwComponentSkeleton);
