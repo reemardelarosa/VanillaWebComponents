@@ -168,7 +168,236 @@
 </html>
 ```
 
-## Web Component Anatomy
+## Web Component's Anatomy
+
+### Two Methods for Writing WC
+- Pure Javascript
+
+#### Advantages
+1. Familiar Concept
+2. Consumed just like any other JS file
+3. Can be easily transpiled to support older browsers
+4. Template Strings can be used to make writing HTML within JS easier
+
+#### Disadvantages
+1. Writing HTML & CSS within JS can feel unanatural and add bloat to the code.
+2. Many text editros and IDEs lack full template string support.
+
+
+```
+index.html
+***************
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vanilla Web Components: Module 1 - Web Component Fundamentals - Web Component Anatomy - Pure JS</title>
+    <script src="my-component.js"></script>
+</head>
+<body>
+    <my-component></my-component>
+</body>
+</html>
+
+my-component.js
+*****************
+class MyComponent extends HTMLElement {
+    connectedCallback() {
+        this.innerHTML = `
+            <style>
+                p {
+                    color: red;
+                }
+            </style>
+            <p>My Web Component</p>
+        `;
+    }
+}
+
+window.customElements.define('my-component', MyComponent);
+```
+
+- HTML Import
+#### Advantages
+1. Automatic de-duplication of imports.
+2. Writing HTML and CSS is more natural and IDE support isn't an issue.
+#### Disadvantages
+1. Currently the HTML Import spec is contentious and not well supported.
+2. Even when polyfilled there are caveats which create bad code smells.
+3. Hard to transpile JS within HTML files with current tools.
+
+```
+index.html
+***********
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vanilla Web Components: Module 1 - Web Component Fundamentals - Web Component Anatomy - HTML Import</title>
+    <link rel="import" href="my-component.html">
+</head>
+<body>
+    <my-component></my-component>
+</body>
+</html>
+
+my-component.html
+****************
+<template>
+    <style>
+        p {
+            color: red;
+        }
+    </style>
+    <p>My Web Component</p>
+</template>
+
+<script>
+    const $owner = (document._currentScript || document.currentScript).ownerDocument;
+    $template = $owner.querySelector('template');
+    class MyComponent extends HTMLElement {
+        connectedCallback() {
+            const $content = document.importNode($template.content, true);
+            this.appendChild($content);
+        }
+    }
+
+    window.customElements.define('my-component', MyComponent)
+</script>
+
+```
+
+### Custom Element Best Practices
+```
+class RwRandowQuote extends HTMLElement {
+    constructor() {
+        super();
+        this._quotes = [
+            "All we have to decide is what to do with the time is given us.",
+            "Two things are infinite: the universe and human stupidity; and I'm not about sure about the",
+            "Try not to become a man of success, but rather try to become a man of value."
+        ];
+        this._$quote = null;
+        this._interval = null;
+
+    }
+    connectedCallback() {
+        this.innerHTML = `
+            <style>
+            .rw-container {
+                width: 500px;
+                margin: auto;
+                border: dotted 1px #999;
+                padding: 20px;
+            }
+            .rw-container h1 {
+                font-size: 20px;
+                margin: 0;
+            }
+            </style>
+            <div clas="rw-container">
+                <h1>Random Quote:</h1>
+                <p>"<span id="quote"></span>"</p>
+            </div>
+        `;
+        this._$quote = this.querySelector("#quote");
+        this._interval = setInterval(() => this._render(), 10000);
+        this._render();
+    }
+
+    _render() {
+        if (this._$quote !== null) {
+            this._$quote.innerHTML = this._quotes[Math.floor(Math.random() * this._quotes.length)];
+        }
+    }
+
+    disconnectedCallback() {
+        clearInterval(this._interval);
+    }
+}
+
+window.customElements.define('rw-random-quote', RwRandowQuote);
+```
+
+### Web Component Attributes
+
+```
+class RwRandowQuote extends HTMLElement {
+    constructor() {
+        super();
+        this._quotes = [
+            "All we have to decide is what to do with the time is given us.",
+            "Two things are infinite: the universe and human stupidity; and I'm not about sure about the",
+            "Try not to become a man of success, but rather try to become a man of value."
+        ];
+        this._$quote = null;
+        this._interval = null;
+
+    }
+    connectedCallback() {
+        this.innerHTML = `
+            <style>
+            .rw-container {
+                width: 500px;
+                margin: auto;
+                border: dotted 1px #999;
+                padding: 20px;
+            }
+            .rw-container h1 {
+                font-size: 20px;
+                margin: 0;
+            }
+            </style>
+            <div clas="rw-container">
+                <h1>Random Quote:</h1>
+                <p>"<span id="quote"></span>"</p>
+            </div>
+        `;
+        this._$quote = this.querySelector("#quote");
+        this._setInterval(this.getAttribute("interval"));
+        this._render();
+    }
+
+    _render() {
+        if (this._$quote !== null) {
+            const index = Math.floor(Math.random() * this._quotes.length);
+            this.setAttribute("current-index", index);
+            this._$quote.innerHTML = this._quotes[index];
+        }
+    }
+
+    _setInterval(value) {
+        if (this._interval !== null) {
+            clearInterval(this._interval);
+        }
+        if (value > 0) {
+            this._interval = setInterval(() => this._render(), value);
+        }
+    }
+
+    static get observedAttributes() {
+        return ['interval'];
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        this._setInterval(newValue);
+    }
+
+    disconnectedCallback() {
+        clearInterval(this._interval);
+    }
+}
+
+window.customElements.define('rw-random-quote', RwRandowQuote);
+```
+
+### Web Component Properties
+> Has getters and setters
+
+### Web Component Shadow DOM
+```
+this._root = this.attachShadow({"mode": "open"});
+```
 ## Star Rating Component
 ## Configurable Slide out Menu Component
 ## Styling Web Components
