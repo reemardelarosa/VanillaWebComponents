@@ -451,6 +451,30 @@ class RWComponentSkeleton extends HTMLElement {
 window.customElements.define('rw-component-skeleton', RwComponentSkeleton);
 ```
 ## Star Rating Component
+```
+Observing Attributes
+
+    static get observedAttributes() {
+        return ["disabled", "value"];
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (oldValue !== newValue) {
+            switch (name) {
+                case "disabled":
+                    this._disabled = (newValue !== null);
+                    break;
+                case "value":
+                    if (this._touched === false) {
+                        this._value = newValue;
+                        this._render();
+                    }
+                    break;
+            }
+        }
+    }
+```
+
 ## Configurable Slide out Menu Component
 ## Styling Web Components
 ## Production Ready Web Components
