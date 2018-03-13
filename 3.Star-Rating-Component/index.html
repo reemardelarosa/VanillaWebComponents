@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>A Practical Guide to Vanilla Web Components - Star Rating Component</title>
-    <script src="rw-star-rating.js"></script>
-    <style>
+    <script src="bower_components/webcomponentsjs/webcomponents-es5-loader.js"></script>
+    <script src="dist/custom-style-interface.min.js"></script>
+    <style class="document-style">
         html, body {
             font-size: 1.5em;
         }
@@ -19,6 +20,16 @@
     <p>
         Star Rating: 
         <rw-star-rating id="sr" value="3"></rw-star-rating>
+        <script>
+            window.addEventListener("WebComponentsReady", function() {
+                var $script = document.createElement("script");
+                $script.src = "dist/rw-star-rating.js";
+                document.head.appendChild($script);
+            });
+            if (window.ShadyCSS && ShadyCSS.CustomStyleInterface) {
+                ShadyCSS.CustomStyleInterface.addCustomStyle(document.querySelector("style.document-style"));
+            }
+        </script>
     </p>
 </body>
 </html>

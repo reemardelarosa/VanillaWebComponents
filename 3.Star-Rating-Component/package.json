@@ -1,0 +1,15 @@
+{
+  "name": "3.star-rating-component",
+  "version": "1.0.0",
+  "description": "",
+  "main": "rw-star-rating.js",
+  "scripts": {
+    "transpile": "babel --presets es2015 rw-star-rating.js --out-file dist/rw-star-rating.js"
+  },
+  "author": "John Reemar Dela Rosa",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "6.26.0",
+    "babel-preset-es2015": "6.24.1"
+  }
+}

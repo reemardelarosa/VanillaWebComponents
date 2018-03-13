@@ -549,6 +549,14 @@ class RwSlideMenu extends HTMLElement {
 - CSS `@apply`
 - 
 ## Production Ready Web Components
+###  Supported Browsers
+- [Custom Elements v1](https://caniuse.com/#feat=custom-elementsv1)
+
+- [HTML Templates](https://caniuse.com/#feat=template)
+
+- [HTML Imports](https://caniuse.com/#feat=imports)
+
+
 
 
 
