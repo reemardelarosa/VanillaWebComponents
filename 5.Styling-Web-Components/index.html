@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>A Practical Guide to Vanilla Web Components - Styling Web Components</title>
+    <style>
+        html, body {
+            padding: 0;
+            margin: 0;
+            --primary-color: #a6d785;
+            --secondary-color: #999999;
+            --border-color: #6d9350;
+        }
+        .container {
+            width: 505px;
+            margin: 50px auto;
+        }
+        .box {
+            width: 250px;
+            height: 250px;
+            border: solid 1px #CCC;
+            box-sizing: border-box;
+            display: inline-block;
+        }
+        .one, .four {
+            background-color: var(--primary-color);
+            border-color: var(--border-color);
+        }
+        .two, .three {
+            background-color: var(--secondary-color);
+            border-color: #333;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box one"></div>
+        <div class="box two"></div>
+        <div class="box three"></div>
+        <div class="box four"></div>
+    </div>
+</body>
+</html>

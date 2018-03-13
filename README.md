@@ -478,10 +478,76 @@ Observing Attributes
 ## Configurable Slide out Menu Component
 
 ```
+class RwSlideMenu extends HTMLElement {
+    static get is() {return "rw-slide-menu"};
+    
+    constructor() {
+        super();
+        this._root = this.attachShadow({
+            "mode": "open"
+        });
+        // Elements
+        this._$frame = null;
+        // Data
+        this._open = false;
+    }
 
+    set open(value) {
+        if (this._open === value) return;
+        this._open = value;
+        this._render();
+    }
+
+    get open() {
+        return this._open;
+    }
+
+    _render() {
+        if (this._$frame !== null) {
+            if (this._open === true) {
+                this._$frame.classList.add("open");
+                this.dispatchEvent(new CustomEvent("menu-opened"));
+            } else {
+                this._$frame.classList.remove("open");
+                this.dispatchEvent(new CustomEvent("menu-closed"));
+            }
+        }
+    }
+
+    connectedCallback() {
+        this._root.innerHTML = `
+            <style>
+                
+            </style>
+            <div class="frame" data-close="true">
+                <nav class="container">
+                    <div class="title">
+                        <div class="title-content">
+                            <slot name="title">Menu</slot>
+                        </div>
+                        <a class="close" data-close="true">&#10006;</a>
+                    </div>
+                    <div class="content">
+                        <slot class="content-slot"></slot>
+                    </div>
+                </nav>
+            </div>
+        `;
+
+        this._$frame = this._root.querySelector('.frame');
+        this._$frame.addEventListener("click", event => {
+            if (event.target.dataset.close === "true") {
+                this.open = false;
+            }
+        });
+    }
 ```
 
 ## Styling Web Components
+- CSS Custom Properties
+- Styling API
+- CSS `@apply`
+- 
 ## Production Ready Web Components
 
 

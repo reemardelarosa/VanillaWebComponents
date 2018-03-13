@@ -32,10 +32,18 @@
             cursor: pointer;
             margin-right: 10px;
         }
+        rw-slide-menu {
+            --menu-width: 60%;
+            --title-styles: {
+                background-color: #333;
+                color: #ccc;
+                font-size: 2em;
+            }
+        }
     </style>
 </head>
 <body>
-    <rw-slide-menu id="menu" theme="red">
+    <rw-slide-menu id="menu" theme="">
         <h3 slot="title">Nav Menu</h3>
         <a href="#">One</a>
         <a href="#">Two</a>

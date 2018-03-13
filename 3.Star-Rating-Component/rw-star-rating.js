@@ -39,7 +39,7 @@ class RWStarRating extends HTMLElement {
                     box-sizing: border-box;
                 }
                 .container {                  
-                    color: #c5c5c5;
+                    color: var(--star-default-color, lightblue);
                     font-size: 1em;
                     line-height: 1em;
                     margin: 0 auto;
@@ -48,7 +48,7 @@ class RWStarRating extends HTMLElement {
                     cursor: pointer;
                   }               
                   .container .top {
-                    color: red;
+                    color: var(--star-selected-color, red);
                     padding: 0;
                     position: absolute;
                     z-index: 1;
@@ -73,7 +73,7 @@ class RWStarRating extends HTMLElement {
                   /* Credit: https://css-tricks.com/star-ratings/ */
                   .container .bottom > span:hover,
                   .container .bottom > span:hover ~ span {               
-                     color: red;
+                     color: var(--star-hover-color, orange);
                   }               
                   :host([disabled]) .container {
                       cursor: inherit;
