@@ -3,7 +3,7 @@ class RWStarRating extends HTMLElement {
         super();
         // Shadow Root
         this._root = this.attachShadow({
-            "mode": "open"
+            mode: "open"
         });
         // Elements
         this._$top = null;
@@ -102,7 +102,6 @@ class RWStarRating extends HTMLElement {
     connectedCallback() {
         if (window.ShadyCSS) ShadyCSS.styleElement(this);
         this._root.appendChild(this._$template);
-        this._root.innerHTML = ``;
         this._disabled = (this.getAttribute("disabled") !== null);
         this._$top = this._root.querySelector(".top");
         this._$bottom = this._root.querySelector(".bottom");

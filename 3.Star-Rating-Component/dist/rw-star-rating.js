@@ -18,7 +18,7 @@ var RWStarRating = function (_HTMLElement) {
         var _this = _possibleConstructorReturn(this, (RWStarRating.__proto__ || Object.getPrototypeOf(RWStarRating)).call(this));
 
         _this._root = _this.attachShadow({
-            "mode": "open"
+            mode: "open"
         });
         // Elements
         _this._$top = null;
@@ -43,7 +43,6 @@ var RWStarRating = function (_HTMLElement) {
 
             if (window.ShadyCSS) ShadyCSS.styleElement(this);
             this._root.appendChild(this._$template);
-            this._root.innerHTML = "";
             this._disabled = this.getAttribute("disabled") !== null;
             this._$top = this._root.querySelector(".top");
             this._$bottom = this._root.querySelector(".bottom");
