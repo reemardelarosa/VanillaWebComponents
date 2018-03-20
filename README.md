@@ -25,7 +25,7 @@
 - HTML Templates
 - HTML Imports
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,7 +57,7 @@
 - Open
 - Closed
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -95,7 +95,7 @@
 
 > Templates can be used to define markup fo specific segments of an application and then rendered on-the-fly as required. 
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -150,7 +150,7 @@
 
 > A contentious specification.
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -184,7 +184,7 @@
 2. Many text editros and IDEs lack full template string support.
 
 
-```
+```html
 index.html
 ***************
 <!DOCTYPE html>
@@ -226,7 +226,7 @@ window.customElements.define('my-component', MyComponent);
 2. Even when polyfilled there are caveats which create bad code smells.
 3. Hard to transpile JS within HTML files with current tools.
 
-```
+```html
 index.html
 ***********
 <!DOCTYPE html>
@@ -268,7 +268,7 @@ my-component.html
 ```
 
 ### Custom Element Best Practices
-```
+```js
 class RwRandowQuote extends HTMLElement {
     constructor() {
         super();
@@ -321,7 +321,7 @@ window.customElements.define('rw-random-quote', RwRandowQuote);
 
 ### Web Component Attributes
 
-```
+```js
 class RwRandowQuote extends HTMLElement {
     constructor() {
         super();
@@ -395,13 +395,13 @@ window.customElements.define('rw-random-quote', RwRandowQuote);
 > Has getters and setters
 
 ### Web Component Shadow DOM
-```
+```js
 this._root = this.attachShadow({"mode": "open"});
 ```
 
 ### Web Component Skeleton
 
-```
+```js
 class RWComponentSkeleton extends HTMLElement {
     constructor() {
         super();
@@ -451,7 +451,7 @@ class RWComponentSkeleton extends HTMLElement {
 window.customElements.define('rw-component-skeleton', RwComponentSkeleton);
 ```
 ## Star Rating Component
-```
+```js
 Observing Attributes
 
     static get observedAttributes() {
@@ -477,7 +477,7 @@ Observing Attributes
 
 ## Configurable Slide out Menu Component
 
-```
+```js
 class RwSlideMenu extends HTMLElement {
     static get is() {return "rw-slide-menu"};
     
